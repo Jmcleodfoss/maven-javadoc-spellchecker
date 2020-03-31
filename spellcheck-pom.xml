@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<url>http://maven.apache.org</url>
+
+	<!--	These tags have to exist, but we don't use them so set them to something generic. -->
+	<groupId>unused</groupId>
+	<artifactId>unused</artifactId>
+	<version>unused</version>
+
+	<properties>
+		<!--	Set this to the path to the directory containing SpellCheckDoclet
+			e.g. /opt/SpellCheckDoclet
+		-->
+		<spchk.doclet.path>path-to-SpellCheckDoclet</spchk.doclet.path>
+
+		<!--	Set this to the path to the directory containing the Jazzy spell checker
+			e.g. /opt/jazzy-0.5.2
+		-->
+		<spchk.jazzy.path>path-to-Jazzy</spchk.jazzy.path>
+
+		<!--	Set this to your personal list of words to ignore.
+			e.g. /home/username/spellcheck/ignoreWords_html.txt
+
+			If you don't have one, delete the corresponding entry in the
+			<additionalOptions> section passed through to the SpellCheckDoclet:
+			-ignorefile ${spchk.user.ignoreFile}
+		-->
+		<spchk.user.ignoreFile>path-and-filename-for-user-ignore-list.txt</spchk.user.ignoreFile>
+
+		<!--	Set this to your project-specific list of words to ignore.
+			e.g. /home/username/project/ignoreWords_project.txt
+
+			If you don't have one, delete the corresponding entry in
+			the <additionalOptions> section passed through to the SpellCheckDoclet:
+			-ignorefile ${spchk.project.ignoreFile}
+
+			Note that, at least under Windows with Cygwin, ${project.basedir} gets mangled.
+		-->
+		<spchk.project.ignoreFile>path-and-filename-for-project-ignore-word-list.txt</spchk.project.ignoreFile>
+
+		<!--	Constants for paths to various dictionaries and ignore files. No need to touch these; just delete the corresponding
+			parameter in the <additionalOptions> section passed through to the SpellCheckDoclet.
+		-->
+		<spchk.doclet.cp>${spchk.doclet.path}/spellcheck.jar</spchk.doclet.cp>
+		<spchk.jazzy.cp>${spchk.jazzy.path}/jazzy-core.jar</spchk.jazzy.cp>
+
+		<!--	The Jazzy spell checker comes with 5 English dictionaries, the primary dictionary and a set of dictionaries which
+			cover differences between American and British English. Select one or the other as desired:
+			- centre.dic or center.dic
+			- colour.dic or color.dic
+			- ise.dic or ize.dic
+			- labelled.dic or labeled.dic
+			- yse.dic or yze.dic
+		-->
+		<spchk.jazzy.dictionary_main>${spchk.jazzy.path}/dict/eng_com.dic</spchk.jazzy.dictionary_main>
+		<spchk.jazzy.dictionary_0>${spchk.jazzy.path}/dict/english.0</spchk.jazzy.dictionary_0>
+		<!--spchk.jazzy.dictionary_1>${spchk.jazzy.path}/dict/centre.dic</spchk.jazzy.dictionary_1-->
+		<spchk.jazzy.dictionary_1>${spchk.jazzy.path}/dict/centre.dic</spchk.jazzy.dictionary_1>
+		<!--spchk.jazzy.dictionary_2>${spchk.jazzy.path}/dict/color.dic</spchk.jazzy.dictionary_2-->
+		<spchk.jazzy.dictionary_2>${spchk.jazzy.path}/dict/colour.dic</spchk.jazzy.dictionary_2>
+		<!--spchk.jazzy.dictionary_3>${spchk.jazzy.path}/dict/ize.dic</spchk.jazzy.dictionary_3-->
+		<spchk.jazzy.dictionary_3>${spchk.jazzy.path}/dict/ise.dic</spchk.jazzy.dictionary_3>
+		<!--spchk.jazzy.dictionary_4>${spchk.jazzy.path}/dict/labeled.dic</spchk.jazzy.dictionary_4-->
+		<spchk.jazzy.dictionary_4>${spchk.jazzy.path}/dict/labelled.dic</spchk.jazzy.dictionary_4>
+		<!--spchk.jazzy.dictionary_5>${spchk.jazzy.path}/dict/yze.dic</spchk.jazzy.dictionary_5-->
+		<spchk.jazzy.dictionary_5>${spchk.jazzy.path}/dict/yse.dic</spchk.jazzy.dictionary_5>
+
+		<!-- Dictionary and ignore files bundled with the SpellCheckDoclet -->
+		<spchk.doclet.java-dictionary>${spchk.doclet.path}/files/dictionary_java.txt</spchk.doclet.java-dictionary>
+		<spchk.doclet.html-ignoreFile>${spchk.doclet.path}/files/ignoreWords_html.txt</spchk.doclet.html-ignoreFile>
+		<spchk.doclet.gui-ignoreFile>${spchk.doclet.path}/files/ignoreWords_gui.txt</spchk.doclet.gui-ignoreFile>
+	</properties>
+
+	<build>
+		<plugins>
+			<!--	The SpellCheckDoclet class uses the legacy Doclet API, which is available in Java 8 and earlier.
+				If your default installation of Java is 9 or higher, you'll need this section, and a corresponding
+				toolchain.xml file in your .m2 directory to define the jdk-8 toolchain.
+
+				If you are using Java 9 or higher, this section must be deleted.
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>1.8></version>
+						</jdk>
+					</toolchains>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<doclet>spellcheck.SpellCheckDoclet</doclet>
+					<docletPath>${spchk.doclet.cp}:${spchk.jazzy.cp}</docletPath>
+					<echo>on</echo>
+					<reportOutputDirectory>${project.reporting.outputDirectory}</reportOutputDirectory>
+					<destDir>spellcheck</destDir>
+					<useStandardDocletOptions>false</useStandardDocletOptions>
+
+					<!-- See the SpellCheckDoclet documentation for details on these paramters. -->
+					<additionalOptions>
+						-dictionary ${spchk.jazzy.dictionary_main} 
+						-dictionary ${spchk.jazzy.dictionary_0} 
+						-dictionary ${spchk.jazzy.dictionary_1} 
+						-dictionary ${spchk.jazzy.dictionary_2} 
+						-dictionary ${spchk.jazzy.dictionary_3} 
+						-dictionary ${spchk.jazzy.dictionary_4} 
+						-dictionary ${spchk.jazzy.dictionary_5} 
+						-dictionary ${spchk.doclet.java-dictionary}
+						-ignore "a"
+						-ignoreContaining "_" 
+						-ignoreContaining "." 
+						-ignoreFile ${spchk.doclet.html-ignoreFile}
+						-ignoreFile ${spchk.doclet.gui-ignoreFile}
+						-ignoreFile ${spchk.project.ignoreFile}
+						-ignoreFile ${spchk.user.ignoreFile}
+						-withSuggestions
+						-checkHTMLFiles
+					</additionalOptions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
