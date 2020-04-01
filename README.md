@@ -14,6 +14,7 @@ This project consists of a single file, spellcheck-pom.xml. As such, it's not ve
 * The [SpellCheckDoclet](http://www.softframeworks.com/etc/spellcheck/SpellCheckDoclet.html), from the [Soft Frame Works website](http://www.softframeworks.com/download/downloadFreeFile.php?file_name=spellCheckDoclet/SpellCheckDoclet.zip)
 
 ## Invoking as a separate pom file
+This is a quick and easy way to spell check a project with no dependencies.
 1. Copy spellcheck-pom.xml to your project directory, and
 2.  Update the properties containing the paths to Jazzy, SpellCheckDoclet, your personal ignore words list, and any project-specific ignore words list
     * spchk.doclet.path: path-to-SpellCheckDoclet
@@ -27,6 +28,7 @@ Perform the spellcheck using
 The results will be written to target/site/spellcheck/CheckDoc.txt
 
 ## Adding SpellCheckDoclet to your pom file
+If your project has dependencies, this is a better way to go.
 1. Create a new profile, assumed here to be called "spellcheck", and copy the contents of the properties and build sections from
 spellcheck-pom.xml into your pom file. You should omit the toolchain plugin section if your default JDK is Java 8.
 2.  Update the properties containing the paths to Jazzy, SpellCheckDoclet, your personal ignore words list, and any project-specific ignore words list
