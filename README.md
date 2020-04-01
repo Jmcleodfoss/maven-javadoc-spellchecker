@@ -1,6 +1,9 @@
 # maven-javadoc-spellchecker
 A pom.xml file which uses the SpellCheckDocklet to spell check Javadoc from Maven. Inspired by [this answer on StackOverflow](https://stackoverflow.com/a/5458962/259686).
 
+## Versioning
+This project consists of a single file, spellcheck-pom.xml. As such, it's not versioned per se beyond the versioning provided by git.
+
 ## Prerequisites
 * Java 8 JDK, either as the default version of Java or defined in a Maven toolchain. I can recommend the [Zulu community build of OpenJDK 8](en toolchain. I have deployed the [Zulu community build of OpenJDK 8](https://www.azul.com/downloads/zulu-community/) which I have used on both Windows 10 and 32-bit CentOS.
 * Maven, obviously
