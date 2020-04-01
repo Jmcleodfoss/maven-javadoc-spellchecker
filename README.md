@@ -37,7 +37,8 @@ Perform the spellcheck using
 The results will be written to target/site/spellcheck/CheckDoc.txt
 
 ### Structure of pom file after adding spellcheck-pom.xml sections - with Java 8 toolchain for default JDK > Java 8
-'''...
+```
+...
 <profiles>
   <profile>
     <id>spellcheck</id>
@@ -87,9 +88,11 @@ The results will be written to target/site/spellcheck/CheckDoc.txt
   </profile>
 </profiles>
 ...
+```
 
 ### Structure of pom file after adding spellcheck-pom.xml sections - Java 8 as default JDK
-'''...
+```
+...
 <profiles>
   <profile>
     <id>spellcheck</id>
@@ -119,3 +122,4 @@ The results will be written to target/site/spellcheck/CheckDoc.txt
   </profile>
 </profiles>
 ...
+```
