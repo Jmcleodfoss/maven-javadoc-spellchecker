@@ -8,6 +8,10 @@
 	<artifactId>unused</artifactId>
 	<version>unused</version>
 
+	<dependencies>
+		<!-- Add your dependencies here. Note that Maven allows empty <dependencies> sections. -->
+	</dependencies>
+
 	<properties>
 		<!--	Set this to the path to the directory containing SpellCheckDoclet
 			e.g. /opt/SpellCheckDoclet
