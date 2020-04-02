@@ -16,13 +16,13 @@ This project consists of a single file, spellcheck-pom.xml. As such, it's not ve
 ## Invoking as a separate pom file
 This is a quick and easy way to spell check a project with no dependencies.
 1. Copy spellcheck-pom.xml to your project directory, and
-2.  Update the properties containing the paths to Jazzy, SpellCheckDoclet, your personal ignore words list, and any project-specific ignore words list
+1.  Update the properties containing the paths to Jazzy, SpellCheckDoclet, your personal ignore words list, and any project-specific ignore words list
     * spchk.doclet.path: path-to-SpellCheckDoclet
     * spchk.jazzy.path: path-to-Jazzy
     * spchk.user.ignoreFile: path-and-filename-for-user-ignore-list.txt
     * spchk.project.ignoreFile: path-and-filename-for-project-ignore-word-list.txt
-3. If you are not using a user-specific or project-specific ignore word list, delete the the corresponding arguments from the javadoc plugin's additionalOptions section.
-4. If you are using JDK 8 by default, delete the entire maven-toolchain-plugin plugin section.
+1. If you are not using a user-specific or project-specific ignore word list, delete the the corresponding arguments from the javadoc plugin's additionalOptions section.
+1. If you are using JDK 8 by default, delete the entire maven-toolchain-plugin plugin section.
 Perform the spellcheck using
     mvn -f spellcheck-pom.xml javadoc:javadoc
 The results will be written to target/site/spellcheck/CheckDoc.txt
@@ -31,12 +31,12 @@ The results will be written to target/site/spellcheck/CheckDoc.txt
 If your project has dependencies, this is a better way to go.
 1. Create a new profile, assumed here to be called "spellcheck", and copy the contents of the properties and build sections from
 spellcheck-pom.xml into your pom file. You should omit the toolchain plugin section if your default JDK is Java 8.
-2.  Update the properties containing the paths to Jazzy, SpellCheckDoclet, your personal ignore words list, and any project-specific ignore words list
+1.  Update the properties containing the paths to Jazzy, SpellCheckDoclet, your personal ignore words list, and any project-specific ignore words list
     * spchk.doclet.path: path-to-SpellCheckDoclet
     * spchk.jazzy.path: path-to-Jazzy
     * spchk.user.ignoreFile: path-and-filename-for-user-ignore-list.txt
     * spchk.project.ignoreFile: path-and-filename-for-project-ignore-word-list.txt
-3. If you are not using a user-specific or project-specific ignore word list, delete the the corresponding arguments from the javadoc plugin's additionalOptions section.
+1. If you are not using a user-specific or project-specific ignore word list, delete the the corresponding arguments from the javadoc plugin's additionalOptions section.
 Perform the spellcheck using
     mvn -P spellcheck javadoc:javadoc
 The results will be written to target/site/spellcheck/CheckDoc.txt
