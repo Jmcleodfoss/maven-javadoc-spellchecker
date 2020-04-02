@@ -15,7 +15,7 @@ This project consists of a single file, spellcheck-pom.xml. As such, it's not ve
 
 ## Invoking as a separate pom file
 This is a quick and easy way to spell check a project with no dependencies.
-1. Copy spellcheck-pom.xml to your project directory, and
+1. Copy spellcheck-pom.xml to your project directory
 1. Copy the dependencies from your pom file into the spellcheck pom file.
 1. Update the properties containing the paths to Jazzy, SpellCheckDoclet, your personal ignore words list, and any project-specific ignore words list
    * spchk.doclet.path: path-to-SpellCheckDoclet
