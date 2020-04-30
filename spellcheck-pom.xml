@@ -114,6 +114,7 @@
 					<echo>on</echo>
 					<reportOutputDirectory>${project.reporting.outputDirectory}</reportOutputDirectory>
 					<destDir>spellcheck</destDir>
+					<show>private</show>
 					<useStandardDocletOptions>false</useStandardDocletOptions>
 
 					<!-- See the SpellCheckDoclet documentation for details on these paramters. -->
