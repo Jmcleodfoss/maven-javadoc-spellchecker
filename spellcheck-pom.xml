@@ -117,6 +117,9 @@
 					<show>private</show>
 					<useStandardDocletOptions>false</useStandardDocletOptions>
 
+					<!-- SpellCheckDoclet antedates the introduction of modules, and it does not understand module-info.java -->
+					<sourceFileExcludes>**/module-info.java</sourceFileExcludes>
+
 					<!-- See the SpellCheckDoclet documentation for details on these paramters. -->
 					<additionalOptions>
 						-dictionary ${spchk.jazzy.dictionary_main} 
